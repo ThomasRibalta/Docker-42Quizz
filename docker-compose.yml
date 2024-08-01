@@ -1,0 +1,43 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  frankenphp:
+    build:
+      context: ./php
+    depends_on:
+      mysql:
+        condition: service_started
+    container_name: frankenphp
+    environment:
+      APP_ENV: prod
+      UUID_42: uuid_exemple
+      SECRET_42: secret_exemple
+    ports:
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+  caddy_data:
+  caddy_config:
