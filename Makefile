@@ -3,9 +3,9 @@ DOCKER_COMPOSE_FILE=docker-compose.yml
 
 CONTAINERS=phpmyadmin frankenphp mysql
 
-VOLUMES=docker-42quizz_caddy_config docker-42quizz_caddy_data docker-42quizz_mysql_data
+VOLUMES=docker-42quizz_mysql_data
 
-IMAGES=docker-42quizz-frankenphp docker-42quizz-mysql phpmyadmin/phpmyadmin
+IMAGES=docker-42quizz-php docker-42quizz-mysql phpmyadmin/phpmyadmin
 
 .PHONY: all clean re
 
@@ -17,7 +17,7 @@ all:
 	@echo "Waiting for 5 seconds to ensure services are up..."
 	sleep 10
 	@echo "Running post-start commands..."
-	docker exec -it frankenphp bash -c "cd commands && php fill.php"
+	docker exec -it php bash -c "cd commands && php fill.php"
 	@echo "Remove site folder..."
 	rm -rf php/Question-pour-un-piscineux-WEBSITE
 
