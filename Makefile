@@ -14,7 +14,7 @@ all:
 	git clone git@github.com:ThomasRibalta/Question-pour-un-piscineux-WEBSITE.git php/Question-pour-un-piscineux-WEBSITE
 	@echo "Starting Docker Compose..."
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
-	@echo "Waiting for 5 seconds to ensure services are up..."
+	@echo "Waiting for 10 seconds to ensure services are up..."
 	sleep 10
 	@echo "Running post-start commands..."
 	docker exec -it php bash -c "cd commands && php fill.php"

@@ -17,10 +17,11 @@ services:
         condition: service_started
     container_name: php
     environment:
-      UUID_42: uuid_exemple
-      SECRET_42: secret_exemple
+      UUID_42: uuid
+      SECRET_42: secret
     ports:
       - "80:80"
+      - "443:443"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
